@@ -40,6 +40,11 @@ dependencies:
   provider: ^6.0.4
   scribble: ^0.9.1
   slide_to_confirm: ^1.1.0
+  auto_size_text: ^3.0.0
+  flutter_colorpicker: ^1.0.3
+  flutter_hooks: ^0.18.5+1
+  image_gallery_saver: ^1.7.1
+  url_launcher: ^5.2.7
 
 # flutter launcher icon
 flutter_icons:
@@ -75,6 +80,7 @@ flutter:
     - assets/fonts/
     - assets/images/
     - assets/images/sun.png
+    - assets/images/UMA_plain.png
     - assets/images/cloud.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

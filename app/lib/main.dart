@@ -1,6 +1,6 @@
-import 'package:app/pages/drawing_page.dart';
-import 'package:app/pages/onboarding_page.dart';
+import 'package:app/view/onboarding_page.dart';
 import 'package:app/theme.dart';
+import 'package:app/view/onboarding_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
