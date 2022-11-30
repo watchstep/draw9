@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:scribble/scribble.dart';
 
+// drawing 저장 버튼
 FloatingActionButton saveButton(ScribbleNotifier scribbleNotifier,
     BuildContext context, String label, Size size) {
   return FloatingActionButton.small(
@@ -20,6 +21,7 @@ FloatingActionButton saveButton(ScribbleNotifier scribbleNotifier,
   );
 }
 
+// drawing image to gallery
 Future<void> _saveImage(ScribbleNotifier scribbleNotifier, String label,
     BuildContext context, Size size) async {
   final image = await scribbleNotifier.renderImage();
@@ -45,7 +47,7 @@ Future<void> _saveImage(ScribbleNotifier scribbleNotifier, String label,
             onTap: () async {
               try {
                 await ImageGallerySaver.saveImage(image.buffer.asUint8List(),
-                    name: label + '.png', isReturnImagePathOfIOS: true);
+                    name: label + DateTime.now().toIso8601String() + '.png', isReturnImagePathOfIOS: true);
               } catch (e) {
                 debugPrint(e.toString());
               }
@@ -80,6 +82,7 @@ Future<void> _saveImage(ScribbleNotifier scribbleNotifier, String label,
   );
 }
 
+// 지우개 버튼
 Widget eraserButton(
     ScribbleNotifier scribbleNotifier, BuildContext context, state,
     {required bool isSelected}) {
@@ -103,6 +106,7 @@ Widget eraserButton(
   );
 }
 
+// 색상 버튼
 Widget colorButton(
   ScribbleNotifier scribbleNotifier,
   BuildContext context, {
@@ -125,6 +129,7 @@ Widget colorButton(
   );
 }
 
+// 뒤로가기 버튼
 Widget undoButton(
   ScribbleNotifier scribbleNotifier,
   BuildContext context,
@@ -140,6 +145,7 @@ Widget undoButton(
   );
 }
 
+// 앞으로가기 버튼
 Widget redoButton(
   ScribbleNotifier scribbleNotifier,
   BuildContext context,
@@ -155,6 +161,7 @@ Widget redoButton(
   );
 }
 
+// 모두 지우기 버튼
 Widget clearButton(ScribbleNotifier scribbleNotifier, BuildContext context) {
   return FloatingActionButton.small(
     onPressed: scribbleNotifier.clear,
