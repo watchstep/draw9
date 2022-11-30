@@ -914,18 +914,6 @@ packaging = "*"
 test = ["pytest (>=6,!=7.0.0,!=7.0.1)", "pytest-cov (>=3.0.0)", "pytest-qt"]
 
 [[package]]
-name = "quickdraw"
-version = "0.2.0"
-description = "An API for downloading and reading the google quickdraw data."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-pillow = "*"
-requests = "*"
-
-[[package]]
 name = "requests"
 version = "2.28.1"
 description = "Python HTTP for Humans."
