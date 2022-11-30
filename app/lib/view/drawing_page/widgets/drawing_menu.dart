@@ -115,12 +115,15 @@ Widget colorButton(
     child: FloatingActionButton.small(
         backgroundColor: color,
         elevation: isSelected ? 10 : 5,
-        shape: !isSelected
-            ? const CircleBorder()
-            : RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-        child: Container(),
+        shape: const CircleBorder(),
+        child: Container(
+            margin: isSelected ? const EdgeInsets.all(3) : null,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: color,
+                border: isSelected
+                    ? Border.all(width: 1.5, color: Colors.white)
+                    : null)),
         onPressed: () => scribbleNotifier.setColor(color)),
   );
 }
