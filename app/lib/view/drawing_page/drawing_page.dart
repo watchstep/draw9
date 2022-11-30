@@ -5,7 +5,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/material.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:provider/provider.dart';
 import 'package:scribble/scribble.dart';
 
 class DrawingPage extends StatefulWidget {
@@ -92,7 +95,7 @@ class _DrawingPageState extends State<DrawingPage> {
                   ),
                 ),
               ),
-              isFABClose == false
+              isFABClose == true
                   ? Positioned(right: 16, bottom : 75, child: menuBar(context, label, size))
                   : SizedBox(),
             ],
@@ -146,7 +149,7 @@ class _DrawingPageState extends State<DrawingPage> {
           colorButton(scribbleNotifier, context,
               color: Colors.red, state: state),
           colorButton(scribbleNotifier, context,
-              color: Colors.purple, state: state),
+              color: Colors.yellow, state: state),
           colorButton(scribbleNotifier, context,
               color: Colors.blue, state: state),
         ],
