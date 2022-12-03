@@ -45,7 +45,7 @@ def _update_first_layer(model, n_in, pretrained):
     
     
 def resnet18(num_classes=30):
-    model = models.resnet18(pretrained=True)
+    model = models.resnet18(pretrained=False)
      # transfer learning on grayscale image
     _update_first_layer(model=model, n_in=1, pretrained=True)
     fc_features = model.fc.in_features
@@ -100,16 +100,15 @@ def mobilenetV2(num_classes=30):
     
     return model
 
-
-class DrawCNN(nn.Module):
+class SimpleCNN(nn.Module):
     def __init__(self, input_size = 28, num_classes = 30):
-        super(DrawCNN, self).__init__()
+        super(SimpleCNN, self).__init__()
         self.num_classes = num_classes
-        self.conv1 = nn.Sequential(nn.Conv2d(1, 32, 3, bias=False), nn.ReLU(inplace=True), nn.MaxPool2d(2))
-        self.conv2 = nn.Sequential(nn.Conv2d(32, 64, 3, bias=False), nn.ReLU(inplace=True), nn.MaxPool2d(2))
-        self.conv3 = nn.Sequential(nn.Conv2d(64, 256, 3))
-        self.fc1 = nn.Sequential(nn.Linear(dimension, 512), nn.Dropout())
-        self.fc2 = nn.Sequential(nn.Linear(512, 128), nn.Dropout())
+        self.conv1 = nn.Sequential(nn.Conv2d(1, 32, 5, bias=False), nn.ReLU(inplace=True), nn.MaxPool2d(2,2))
+        self.conv2 = nn.Sequential(nn.Conv2d(32, 64, 5, bias=False), nn.ReLU(inplace=True), nn.MaxPool2d(2, 2))
+        dimension = int(64 * pow(input_size/4 - 3, 2))
+        self.fc1 = nn.Sequential(nn.Linear(dimension, 512), nn.Dropout(0.3))
+        self.fc2 = nn.Sequential(nn.Linear(512, 128), nn.Dropout(0.3))
         self.fc3 = nn.Sequential(nn.Linear(128, num_classes))
 
     def forward(self, input):
