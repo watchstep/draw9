@@ -47,5 +47,5 @@ def imshow(img, label):
   plt.figure(figsize=(5, 5))
   plt.imshow(np.transpose(npimg, (1, 2, 0)))
   plt.axis('off')
-  save_figure(label)
+#   save_figure(label)
   plt.show()
