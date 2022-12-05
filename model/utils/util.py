@@ -15,7 +15,7 @@ def set_seed(seed):
     random.seed(seed)
 
 # Save plt as png
-def save_figure(figure_name, figure_base_path = './/', figure_extension='.png', resolution=300):
+def save_figure(figure_name, figure_base_path = './assets/', figure_extension='.png', resolution=300):
     # make directory
     try:
         if not os.path.exists(figure_base_path):
