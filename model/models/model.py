@@ -58,8 +58,8 @@ def resnet18(num_classes=30):
     return model
     
     
-def resnet34(num_classes=30):
-    model = models.resnet34(pretrained=False)
+def resnet34(pretrained, num_classes=30, ):
+    model = models.resnet34(pretrained=pretrained)
     
     conv1_out_channels = model.conv1.out_channels
     model.conv1 = nn.Conv2d(1, conv1_out_channels, kernel_size=3,
@@ -76,7 +76,7 @@ def resnet34(num_classes=30):
   
   
 def resnet50(num_classes=30):
-    model = models.resnet50(pretrained=False)
+    model = models.resnet50(pretrained=True)
     
     conv1_out_channels = model.conv1.out_channels
     model.conv1 = nn.Conv2d(1, conv1_out_channels, kernel_size=3,
@@ -92,7 +92,7 @@ def resnet50(num_classes=30):
 
 
 def mobilenetV2(num_classes=30):
-    model = models.mobilenet_v2(pretrained=False)
+    model = models.mobilenet_v2(pretrained=True)
     
     _update_first_layer(model=model, n_in=1, pretrained=False)
     
