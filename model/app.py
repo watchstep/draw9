@@ -1,3 +1,4 @@
+from flask_ngrok import run_with_ngrok
 from flask import Flask, jsonify, request
 
 import torch
@@ -15,6 +16,7 @@ from train import *
 
 app = Flask(__name__)
 
+run_with_ngrok(app)  
 pt_path = './models/checkpoint/resnet50.pt'
 
 def load_model(pt_path):
