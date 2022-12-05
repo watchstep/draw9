@@ -44,8 +44,8 @@ def _update_first_layer(model, n_in, pretrained):
     setattr(parent, name, new_layer)
     
     
-def resnet18(num_classes=30):
-    model = models.resnet18(pretrained=False)
+def resnet18(num_classes=30, pretrained=True):
+    model = models.resnet18(pretrained=pretrained)
      # transfer learning on grayscale image
     _update_first_layer(model=model, n_in=1, pretrained=True)
     fc_features = model.fc.in_features
@@ -58,7 +58,7 @@ def resnet18(num_classes=30):
     return model
     
     
-def resnet34(pretrained, num_classes=30, ):
+def resnet34(num_classes=30, pretrained=True):
     model = models.resnet34(pretrained=pretrained)
     
     conv1_out_channels = model.conv1.out_channels
@@ -75,8 +75,8 @@ def resnet34(pretrained, num_classes=30, ):
     return model
   
   
-def resnet50(num_classes=30):
-    model = models.resnet50(pretrained=True)
+def resnet50(num_classes=30, pretrained=True):
+    model = models.resnet50(pretrained=pretrained)
     
     conv1_out_channels = model.conv1.out_channels
     model.conv1 = nn.Conv2d(1, conv1_out_channels, kernel_size=3,
@@ -91,8 +91,8 @@ def resnet50(num_classes=30):
     return model
 
 
-def mobilenetV2(num_classes=30):
-    model = models.mobilenet_v2(pretrained=True)
+def mobilenetV2(num_classes=30, pretrained=True):
+    model = models.mobilenet_v2(pretrained=pretrained)
     
     _update_first_layer(model=model, n_in=1, pretrained=False)
     

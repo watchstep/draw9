@@ -80,7 +80,7 @@ def prepare_dataset(npy_files_path='./dataset/*.npy',test_ratio=0.2, max_items_p
     # transform
     transforms_train = transforms.Compose([
         transforms.Normalize((0.1702,), (0.3224)),
-        transforms.GaussianBlur(kernel_size=3, sigma=(0.1, 0.2))
+        transforms.GaussianBlur(kernel_size=(7, 13))
     ])
     
     transforms_test = transforms.Compose([
