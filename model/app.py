@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_ngrok import run_with_ngrok
 
 import torch
 import io
@@ -14,6 +15,7 @@ from train import *
 
 
 app = Flask(__name__)
+run_with_ngrok(app)
 
 pt_path = './models/checkpoint/resnet50.pt'
 
@@ -68,11 +70,12 @@ def get_prediction(img_byte):
 def root():
     return jsonify({'msg' : 'Try POSTing to the /predict endpoint with an image byte file'})
 
+# 
 
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
-        img_byte = request.files['file']
+        img_byte = request.files['img']
         if img_byte is not None:
             label_id, label_name = get_prediction(img_byte=img_byte)
             
