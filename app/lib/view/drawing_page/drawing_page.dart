@@ -6,7 +6,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_state_notifier/flutter_state_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:scribble/scribble.dart';
+import 'package:http/http.dart' as http;
 
 class DrawingPage extends StatefulWidget {
   const DrawingPage({Key? key}) : super(key: key);
@@ -17,13 +19,30 @@ class DrawingPage extends StatefulWidget {
 
 class _DrawingPageState extends State<DrawingPage> {
   late ScribbleNotifier scribbleNotifier;
-  String label = 'monkey';
+  late String label;
   bool isFABClose = true;
+  late String labelName;
+  late var image;
 
   @override
   void initState() {
     scribbleNotifier = ScribbleNotifier();
     super.initState();
+  }
+
+  Future postDrawing() async {
+    var request = http.MultipartRequest(
+        "POST", Uri.parse('http://7c1c-165-132-5-141.ngrok.io/'));
+
+    final headers = {"Content-type": "multipart/form-data"};
+
+    request.files.add(http.MultipartFile.fromBytes(
+        'img', image.readAsByteSync(),
+        filename: 'drawing'));
+
+    request.headers.addAll(headers);
+
+    var res = await request.send();
   }
 
   @override
@@ -83,17 +102,30 @@ class _DrawingPageState extends State<DrawingPage> {
                 child: Container(
                   constraints: BoxConstraints(maxWidth: size.width * .4),
                   padding: const EdgeInsets.all(3),
-                  child: AutoSizeText(
-                    'Is it\n'
-                    '$label..?',
-                    style: textTheme().headline2,
-                    textAlign: TextAlign.center,
-                    maxLines: 3,
-                  ),
+                  child:
+                      FutureBuilder(builder: (context, AsyncSnapshot snapshot) {
+                    if (!snapshot.hasData) return CircularProgressIndicator();
+                    return ChangeNotifierProvider<
+                        ValueNotifier<ScribbleNotifier>>(
+                      create: (_) {
+                        return ValueNotifier(snapshot.data);
+                      },
+                      child: AutoSizeText(
+                        'Is it\n'
+                        '$label..?',
+                        style: textTheme().headline2,
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                      ),
+                    );
+                  }),
                 ),
               ),
               isFABClose == true
-                  ? Positioned(right: 16, bottom : 75, child: menuBar(context, label, size))
+                  ? Positioned(
+                      right: 16,
+                      bottom: 75,
+                      child: menuBar(context, label, size))
                   : SizedBox(),
             ],
           ),
