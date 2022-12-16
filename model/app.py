@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_ngrok import run_with_ngrok
+# from flask_ngrok import run_with_ngrok
 
 import torch
 import io
@@ -15,7 +15,7 @@ from train import *
 
 
 app = Flask(__name__)
-run_with_ngrok(app)
+# run_with_ngrok(app)
 
 pt_path = './models/checkpoint/resnet50.pt'
 
@@ -83,4 +83,4 @@ def predict():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
